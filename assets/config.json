@@ -4,7 +4,7 @@
   "notificationSize": "small",
   "notificationOpacity": 94,
   "theme": "midnight",
-  "dashboardTheme": "ocean",
+  "dashboardTheme": "glass",
   "loginEnabled": true,
   "reminders": [
     {

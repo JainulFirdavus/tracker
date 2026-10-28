@@ -55,7 +55,7 @@ export function Notification({ params, bridge }) {
   }, [bridge]);
   useEffect(() => { document.body.classList.toggle('leaving', leaving); return () => document.body.classList.remove('leaving'); }, [leaving]);
   return <section className="reminder" aria-labelledby="reminder-title" aria-describedby="reminder-message">
-    <div className="topline"><span className="brand"><span className="status-dot" />A LITTLE RESET</span><button className="close" type="button" aria-label="Dismiss reminder" onClick={dismiss}><X size={15} aria-hidden="true" /></button></div>
+    <div className="topline"><span className="brand"><span className="status-dot" />A MJ Pluse</span><button className="close" type="button" aria-label="Dismiss reminder" onClick={dismiss}><X size={15} aria-hidden="true" /></button></div>
     <div className="content"><div className="artwork"><span className="artwork-halo" />{params.get('symbol') ? <Symbol size={48} color="var(--accent)" strokeWidth={1.5} aria-hidden="true" /> : params.get('icon') && <img id="reminder-icon" src={params.get('icon')} alt="" />}</div><div className="copy"><p className="eyebrow" id="reminder-name">{params.get('name')}</p><h1 id="reminder-title">{params.get('title')}</h1><p className="message" id="reminder-message">{params.get('message')}</p></div></div>
     <footer><span className="countdown" role="timer">Closing in <span id="seconds">{seconds}</span>s</span><button className="done" type="button" onClick={dismiss}>Got it<ArrowRight size={13} aria-hidden="true" /></button></footer>
     <div className="progress-track" aria-hidden="true"><div className="progress" /></div>

@@ -34,7 +34,7 @@ export function useSettings() {
   useEffect(() => {
     if (draft)
       document.documentElement.dataset.dashboardTheme =
-        draft.dashboardTheme ?? "forest";
+        draft.dashboardTheme ?? "glass";
   }, [draft?.dashboardTheme]);
 
   useEffect(() => {
@@ -107,7 +107,7 @@ export function useSettings() {
   async function setTheme(theme) {
     if (saving || !draft) return;
     clearTimeout(themeIntensityTimer.current);
-    const previous = draft.dashboardTheme ?? "forest";
+    const previous = draft.dashboardTheme ?? "glass";
     setSaving(true);
     setDraft((current) => ({ ...current, dashboardTheme: theme }));
     setThemeMessage("Saving theme...");
@@ -160,7 +160,7 @@ export function useSettings() {
       setSaving(true);
       try {
         const appearance = {
-          dashboardTheme: draft.dashboardTheme ?? "forest",
+          dashboardTheme: draft.dashboardTheme ?? "glass",
           dashboardGradientIntensity:
             field === "dashboardGradientIntensity"
               ? intensity

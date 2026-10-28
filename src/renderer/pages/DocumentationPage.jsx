@@ -19,7 +19,7 @@ export function DocumentationPage() {
     return () => controller.abort();
   }, [retry]);
   return <>
-    <div className="intro"><p className="kicker">THE LITTLE RESET HANDBOOK</p><h1 tabIndex={-1}>A little <span>guidance.</span></h1></div>
+    <div className="intro"><p className="kicker">THE MJ Pluse HANDBOOK</p><h1 tabIndex={-1}>A little <span>guidance.</span></h1></div>
     <section className="panel document-panel" aria-label="Application documentation">
       {error ? <><p id="document-status" role="status" className="error">{error}</p><button className="secondary-button" onClick={() => setRetry(value => value + 1)}>Retry loading documentation</button></> : !text ? <p role="status">Loading documentation...</p> : <article id="document-content"><ReactMarkdown components={{ h1: ({ children }) => <h2>{children}</h2> }}>{text}</ReactMarkdown></article>}
     </section>

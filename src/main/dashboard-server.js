@@ -37,7 +37,7 @@ function createDashboardServer({
     res.setHeader("Referrer-Policy", "no-referrer");
     res.setHeader(
       "Content-Security-Policy",
-      "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self' data:; frame-src 'self' https://w.soundcloud.com; frame-ancestors 'self'; object-src 'none'; base-uri 'none'; form-action 'self'",
+      "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self' data:; connect-src 'self' https://api.open-meteo.com; frame-src 'self' https://w.soundcloud.com; frame-ancestors 'self'; object-src 'none'; base-uri 'none'; form-action 'self'",
     );
     function json(status, data) {
       res.writeHead(status, {

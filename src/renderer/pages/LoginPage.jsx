@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import { useState } from 'react';
 import { Eye, EyeOff, LogIn } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -33,7 +27,7 @@ export function LoginPage({ onLogin }) {
   }
 
   return <main className="login-page">
-    <div className="login-brand"><Link className="logo" to="/"><span className="logo-mark">lr</span> little reset</Link><img src="/assets/eye.gif" alt="" width="96" height="96" /></div>
+    <div className="login-brand"><Link className="logo" to="/"><span className="logo-mark">lr</span> MJ Pluse</Link><img src="/assets/eye.gif" alt="" width="96" height="96" /></div>
     <section className="login-content" aria-labelledby="login-title">
       <p className="kicker">YOUR SPACE</p><h1 id="login-title">Welcome back</h1>
       <form className="login-form" onSubmit={submit}>

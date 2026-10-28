@@ -119,7 +119,7 @@ function navigate(focusHeading = false) {
   }
   const label = document.querySelector(`nav [data-page="${active}"]`).textContent.replace(/^\s*\d+\s*/, '').trim();
   document.getElementById('page-label').textContent = label;
-  document.title = `${label} - Little Reset`;
+  document.title = `${label} - MJ Pluse`;
   if (active === 'documentation') loadDocumentation();
   window.dispatchEvent(new CustomEvent('pagechange', { detail: active }));
   if (focusHeading) {
@@ -328,8 +328,11 @@ async function refreshStatus() {
   statusRefreshing = true;
   try {
     const status = await request('/api/status');
+    connection.removeAttribute('title');
+    connection.removeAttribute('aria-label');
+    connection.classList.remove('connection-warning');
     connection.textContent = !status.available ? 'Tracking paused - locked or asleep'
-      : status.idleSeconds >= settings.idleAfterSeconds ? 'Idle - active timers paused' : 'Tracker connected - working with you';
+      : status.idleSeconds >= settings.idleAfterSeconds ? 'Idle - active timers paused' : 'Tracker connected -';
     for (const state of status.reminders) {
       const card = Array.from(reminderList.children).find(item => item.dataset.id === state.id);
       if (!card) continue;
@@ -352,7 +355,10 @@ async function refreshStatus() {
         `${Math.min(100, state.activeSeconds / state.targetSeconds * 100)}%`;
     }
   } catch (error) {
-    connection.textContent = `Tracker unavailable: ${error.message}`;
+    connection.textContent = '⚠';
+    connection.classList.add('connection-warning');
+    connection.setAttribute('aria-label', `Tracker unavailable: ${error.message}`);
+    connection.title = `Tracker unavailable: ${error.message}`;
     for (const timer of reminderList.querySelectorAll('.timer-remaining')) timer.textContent = 'Timer unavailable';
   } finally {
     statusRefreshing = false;
@@ -378,7 +384,10 @@ async function initialize() {
     setInterval(refreshStatus, 1000);
   } catch (error) {
     notice(`Could not load dashboard: ${error.message}. Reload to retry.`, true);
-    connection.textContent = 'Tracker unavailable';
+    connection.textContent = '⚠';
+    connection.classList.add('connection-warning');
+    connection.setAttribute('aria-label', `Tracker unavailable: ${error.message}`);
+    connection.title = `Tracker unavailable: ${error.message}`;
   }
 }
 

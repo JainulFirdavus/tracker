@@ -45,7 +45,7 @@ function AppRoutes() {
   }, [reload]);
   const retryAuth = () => { setError(''); setReload(current => current + 1); };
   if (!authentication || error) {
-    return <main className="login-page"><section className="login-content"><h1>Little Reset</h1><p role={error ? 'alert' : 'status'}>{error || 'Connecting...'}</p>{error && <button className="secondary-button" onClick={retryAuth}>Retry</button>}</section></main>;
+    return <main className="login-page"><section className="login-content"><h1>MJ Pluse</h1><p role={error ? 'alert' : 'status'}>{error || 'Connecting...'}</p>{error && <button className="secondary-button" onClick={retryAuth}>Retry</button>}</section></main>;
   }
   return <Routes>
     <Route path="/login" element={<LoginRoute authentication={authentication} />} />
@@ -112,7 +112,7 @@ function Dashboard({ authentication }) {
     return () => window.removeEventListener('keydown', closeOnEscape);
   }, [quickMenuOpen, mobileDrawerOpen]);
   useEffect(() => {
-    document.title = `${label} - Little Reset`;
+    document.title = `${label} - MJ Pluse`;
     main.current?.querySelector('section:not([hidden]) h1')?.focus({ preventScroll: true });
     setQuickMenuOpen(false);
   }, [label, location.pathname]);
@@ -124,7 +124,7 @@ function Dashboard({ authentication }) {
   }, [page, location.search]);
   const connection = tracker.error ? `Tracker unavailable: ${tracker.error}` : !tracker.status ? 'Connecting to your tracker...'
     : !tracker.status.available ? 'Tracking paused - locked or asleep'
-      : tracker.status.idleSeconds >= preferences.saved.idleAfterSeconds ? 'Idle - active timers paused' : 'Tracker connected - working with you';
+      : tracker.status.idleSeconds >= preferences.saved.idleAfterSeconds ? 'Idle - active timers paused' : 'Tracker connected - ';
   const toggleLabel = mobileLayout ? mobileDrawerOpen ? 'Close navigation' : 'Open navigation' : sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar';
   function toggleSidebar() {
     if (window.innerWidth <= 760) setMobileDrawerOpen(open => !open);
@@ -132,7 +132,7 @@ function Dashboard({ authentication }) {
   }
   return <div className={`app-shell${sidebarCollapsed ? ' sidebar-collapsed' : ''}`} data-drawer-open={mobileDrawerOpen}>
     <aside id="main-sidebar" className="sidebar" aria-label="Application sidebar" data-collapsed={sidebarCollapsed}>
-      <Link className="logo" to="/overview" onClick={() => setMobileDrawerOpen(false)}><span className="logo-mark">lr</span><span className="logo-name">little reset</span></Link>
+      <Link className="logo" to="/overview" onClick={() => setMobileDrawerOpen(false)}><span className="logo-mark">lr</span><span className="logo-name">MJ Pluse</span></Link>
       <p className="nav-caption">YOUR SPACE</p>
       <nav aria-label="Main navigation">{pages.map(([id, name], index) => {
       const Icon = pageIcons[id];
@@ -142,7 +142,7 @@ function Dashboard({ authentication }) {
     </aside>
     <button className="sidebar-backdrop" type="button" aria-label="Dismiss navigation drawer" hidden={!mobileDrawerOpen} onClick={() => setMobileDrawerOpen(false)} />
     <header className="site-header"><button className="sidebar-toggle" type="button" aria-label={toggleLabel} aria-expanded={mobileLayout ? mobileDrawerOpen : !sidebarCollapsed} aria-controls="main-sidebar" onClick={toggleSidebar}><Menu size={19} aria-hidden="true" /></button><div className="page-location"><span className="kicker">YOUR WORKDAY COMPANION</span><strong id="page-label">{label}</strong></div><MusicPlayer music={preferences.saved?.music} /><NavLink className="weather-widget" to="/settings" aria-label="Weather not connected. View future integrations in Settings."><Cloud className="weather-symbol" size={28} aria-hidden="true" /><span><strong>Weather <span className="weather-value">--</span></strong><small>Not connected</small></span></NavLink><span className="connection" id="connection">{connection}</span>{authentication.enabled && <div className="account-controls"><span>{authentication.username}</span><IconButton icon={LogOut} label="Sign out" onClick={logout} />{logoutError && <span role="alert">{logoutError}</span>}</div>}</header>
-    <main ref={main}>{!preferences.draft ? <section className="intro"><h1>Little Reset</h1><p role="status">{preferences.error || 'Loading settings...'}</p>{preferences.error && <button className="secondary-button" onClick={preferences.retry}>Retry</button>}</section> : <div className="page-stack"><Outlet context={{ preferences, tracker }} /></div>}</main>
+    <main ref={main}>{!preferences.draft ? <section className="intro"><h1>MJ Pluse</h1><p role="status">{preferences.error || 'Loading settings...'}</p>{preferences.error && <button className="secondary-button" onClick={preferences.retry}>Retry</button>}</section> : <div className="page-stack"><Outlet context={{ preferences, tracker }} /></div>}</main>
     <div className="quick-nav" data-open={quickMenuOpen}>
       <div className="quick-actions" id="quick-actions" role="group" aria-label="Quick navigation" aria-hidden={!quickMenuOpen} inert={!quickMenuOpen}>
         {quickLinks.map(([id, name, Icon]) => <Link key={id} className="quick-action" to={`/${id}`} aria-label={`Go to ${name}`} aria-current={page === id ? 'page' : undefined} title={name} onClick={() => setQuickMenuOpen(false)}><Icon size={19} aria-hidden="true" /></Link>)}

@@ -1,4 +1,4 @@
-# Little Reset
+# MJ Pluse
 
 Background health reminders with an editable local dashboard.
 
@@ -36,12 +36,12 @@ between development and the installed app; both use port 4387.
 - **Settings** controls dashboard appearance—including the colorful Gradient
   and translucent Glass themes, each with its own intensity slider—notification
   style and live preview (save notification appearance here independently from
-  reminder edits), and login. Optional integrations such as weather and other
-  real-time trackers are not implemented or enabled.
+  reminder edits), and login. Other optional real-time integrations are not
+  implemented or enabled.
 
-The top bar includes a weather placeholder labeled **Not connected**. It does not
-show live conditions, request your location, or contact any weather service.
-Select it to open Settings.
+Select the weather widget in the top bar to request location access and load
+current temperature, humidity, and wind from Open-Meteo. Coordinates are used
+only for that weather request and are not saved by the app.
 
 Switching between navigation pages keeps unsaved Activity edits. The save bar
 appears only on Activity. Navigation also supports browser back/forward and
@@ -63,11 +63,11 @@ background app.
 ### Installed macOS app
 
 1. Open Spotlight with Command + Space, search for **Activity Monitor**, and open it.
-2. Search for **Little Reset**.
-3. Select the main **Little Reset** process, not a Helper process.
+2. Search for **MJ Pluse**.
+3. Select the main **MJ Pluse** process, not a Helper process.
 4. Click the **Stop (x)** button and choose **Quit**.
 
-Launch Little Reset again from Applications whenever you want to resume reminders.
+Launch MJ Pluse again from Applications whenever you want to resume reminders.
 
 ### Running with npm
 
@@ -80,8 +80,8 @@ Run `npm start` again to resume reminders.
 npm run dist:mac
 ```
 
-The Apple Silicon installer is written to `dist/Little Reset-1.0.0-arm64.dmg`.
-Open the DMG and drag Little Reset into Applications, then launch it.
+The Apple Silicon installer is written to `dist/MJ Pluse-1.0.0-arm64.dmg`.
+Open the DMG and drag MJ Pluse into Applications, then launch it.
 The installed app opens the dashboard in your default browser.
 
 ## Local data storage

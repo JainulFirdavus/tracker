@@ -71,7 +71,7 @@ function eventReminder(event) {
     id: `event-${event.id}`, name: event.type === 'meeting' ? 'Meeting reminder' : 'Task reminder',
     title: event.title,
     message: event.notes || new Date(event.start).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }),
-    icon: '',
+    icon: './assets/img/task.png',
     symbol: event.type === 'meeting' ? 'calendar-clock' : 'clipboard-check'
   };
 }

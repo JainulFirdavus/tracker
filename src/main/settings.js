@@ -56,7 +56,7 @@ function validateSettings(input) {
   const theme = input.theme ?? "glass";
   if (!themes.includes(theme))
     throw new Error("Choose one of the four notification themes.");
-  const dashboardTheme = input.dashboardTheme ?? "forest";
+  const dashboardTheme = input.dashboardTheme ?? "glass";
   if (!dashboardThemes.includes(dashboardTheme))
     throw new Error("Choose a valid dashboard theme.");
   const dashboardGradientIntensity = number(
