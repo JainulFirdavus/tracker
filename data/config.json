@@ -4,13 +4,13 @@
   "notificationSize": "small",
   "notificationOpacity": 94,
   "theme": "midnight",
-  "dashboardTheme": "ocean",
+  "dashboardTheme": "paper",
   "dashboardFont": "space-grotesk",
   "music": {
     "trackName": "Netru Ponavai.mp3",
     "trackType": "audio/mpeg",
     "trackSizeBytes": 8359992,
-    "theme": "moss",
+    "theme": "ocean",
     "visualizer": "wave",
     "volume": 11
   },
