@@ -6,3 +6,4 @@ renderer-dist/
 coverage/
 .DS_Store
 *.log
+data/
