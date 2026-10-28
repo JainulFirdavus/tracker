@@ -286,6 +286,7 @@ function Dashboard({ authentication }) {
               );
             })}
         </nav>
+        <br />
         <p className="nav-caption">LISTENING</p>
         <nav aria-label="Music navigation">
           <NavLink
@@ -300,9 +301,9 @@ function Dashboard({ authentication }) {
           </NavLink>
         </nav>
         <footer className="sidebar-footer">
-          <span className="local-badge">LOCAL FIRST</span>
-          <strong>Little Reset</strong>
-          <small>© {new Date().getFullYear()}</small>
+          <span className="local-badge">Firdavus</span>
+          <strong>MJ Pluse  <small>© {new Date().getFullYear()}</small></strong>
+         
         </footer>
       </aside>
       <button

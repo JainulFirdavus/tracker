@@ -10,7 +10,7 @@
         "intervalMinutes": 10,
         "title": "Look Away!",
         "message": "Look 20 feet away for 20 seconds.",
-        "icon": "assets/eye.gif"
+        "icon": "assets/img/eye.gif"
       },
       {
         "id": "hydration",
@@ -19,7 +19,7 @@
         "intervalMinutes": 30,
         "title": "Hydration Time!",
         "message": "Drink a fresh glass of water.",
-        "icon": "assets/water.gif"
+        "icon": "assets/img/water.gif"
       },
       {
         "id": "stand-up",
@@ -28,7 +28,7 @@
         "intervalMinutes": 60,
         "title": "Stand Up!",
         "message": "Stand up and stretch your body.",
-        "icon": "assets/walk.gif",
+        "icon": "assets/img/walk.gif",
         "resetAfterIdleSeconds": 300
       }
     ]
