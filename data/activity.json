@@ -36,7 +36,7 @@
   "states": [
     {
       "id": "eye-rest",
-      "activeMs": 377879,
+      "activeMs": 558646,
       "pending": false,
       "retryAt": 0,
       "firedSlots": [],
@@ -44,7 +44,7 @@
     },
     {
       "id": "hydration",
-      "activeMs": 439960,
+      "activeMs": 620727,
       "pending": false,
       "retryAt": 0,
       "firedSlots": [],
@@ -52,7 +52,7 @@
     },
     {
       "id": "stand-up",
-      "activeMs": 429949,
+      "activeMs": 43552,
       "pending": false,
       "retryAt": 0,
       "firedSlots": [],
