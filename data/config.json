@@ -1,0 +1,48 @@
+{
+  "idleAfterSeconds": 60,
+  "notificationDurationSeconds": 10,
+  "notificationSize": "small",
+  "notificationOpacity": 94,
+  "theme": "midnight",
+  "dashboardTheme": "ocean",
+  "dashboardFont": "system",
+  "music": {
+    "trackName": "Netru Ponavai.mp3",
+    "trackType": "audio/mpeg",
+    "trackSizeBytes": 8359992,
+    "theme": "sunset",
+    "visualizer": "bars",
+    "volume": 55
+  },
+  "loginEnabled": true,
+  "reminders": [
+    {
+      "id": "eye-rest",
+      "enabled": true,
+      "name": "20-20-20 Eye Break",
+      "intervalMinutes": 10,
+      "title": "Look Away!",
+      "message": "Look 20 feet away for 20 seconds.",
+      "icon": "assets/eye.gif"
+    },
+    {
+      "id": "hydration",
+      "enabled": true,
+      "name": "Drink Water",
+      "intervalMinutes": 30,
+      "title": "Hydration Time!",
+      "message": "Drink a fresh glass of water.",
+      "icon": "assets/water.gif"
+    },
+    {
+      "id": "stand-up",
+      "enabled": true,
+      "name": "Stand and Stretch",
+      "intervalMinutes": 60,
+      "title": "Stand Up!",
+      "message": "Stand up and stretch your body.",
+      "icon": "assets/walk.gif",
+      "resetAfterIdleSeconds": 300
+    }
+  ]
+}

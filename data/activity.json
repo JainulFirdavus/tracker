@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "config": {
+    "idleAfterSeconds": 60,
+    "reminders": [
+      {
+        "id": "eye-rest",
+        "enabled": true,
+        "name": "20-20-20 Eye Break",
+        "intervalMinutes": 10,
+        "title": "Look Away!",
+        "message": "Look 20 feet away for 20 seconds.",
+        "icon": "assets/eye.gif"
+      },
+      {
+        "id": "hydration",
+        "enabled": true,
+        "name": "Drink Water",
+        "intervalMinutes": 30,
+        "title": "Hydration Time!",
+        "message": "Drink a fresh glass of water.",
+        "icon": "assets/water.gif"
+      },
+      {
+        "id": "stand-up",
+        "enabled": true,
+        "name": "Stand and Stretch",
+        "intervalMinutes": 60,
+        "title": "Stand Up!",
+        "message": "Stand up and stretch your body.",
+        "icon": "assets/walk.gif",
+        "resetAfterIdleSeconds": 300
+      }
+    ]
+  },
+  "states": [
+    {
+      "id": "eye-rest",
+      "activeMs": 211259,
+      "pending": false,
+      "retryAt": 0,
+      "firedSlots": [],
+      "day": null
+    },
+    {
+      "id": "hydration",
+      "activeMs": 869949,
+      "pending": false,
+      "retryAt": 0,
+      "firedSlots": [],
+      "day": null
+    },
+    {
+      "id": "stand-up",
+      "activeMs": 869949,
+      "pending": false,
+      "retryAt": 0,
+      "firedSlots": [],
+      "day": null
+    }
+  ]
+}

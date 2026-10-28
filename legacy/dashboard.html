@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Little Reset - Health dashboard</title>
+  <link rel="stylesheet" href="/dashboard.css">
+  <script src="/vendor/calendar.js" defer></script>
+  <script src="/vendor/icons.js" defer></script>
+  <script src="/dashboard.js" defer></script>
+  <script src="/planner-ui.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar" aria-label="Application sidebar">
+    <a class="logo" href="#activity"><span class="logo-mark">lr</span> little reset</a>
+    <p class="nav-caption">YOUR SPACE</p>
+    <nav aria-label="Main navigation">
+      <a href="#activity" data-page="activity" aria-current="page"><span aria-hidden="true">01</span> Activity</a>
+      <a href="#planner" data-page="planner"><span aria-hidden="true">02</span> Reminders</a>
+      <a href="#documentation" data-page="documentation"><span aria-hidden="true">03</span> Documentation</a>
+      <a href="#settings" data-page="settings"><span aria-hidden="true">04</span> Settings</a>
+    </nav>
+    <div class="sidebar-note"><span class="local-badge">LOCAL FIRST</span><p>Small resets.<br>More balanced days.</p></div>
+  </aside>
+  <header class="site-header">
+    <div class="page-location"><span class="kicker">YOUR WORKDAY COMPANION</span><strong id="page-label">Activity</strong></div>
+    <a class="weather-widget" href="#settings" aria-label="Weather not connected. View future integrations in Settings."><span class="weather-symbol" aria-hidden="true">&#9729;</span><span><strong>Weather <span class="weather-value">--&deg;</span></strong><small>Not connected</small></span></a>
+    <span class="connection" id="connection">Connecting to your tracker...</span>
+  </header>
+  <main>
+    <section id="page-activity" class="page" aria-label="Activity">
+    <section class="intro">
+      <p class="kicker">YOUR WORKDAY, A LITTLE LIGHTER</p>
+      <h1 tabindex="-1">Make room for <span>feeling good.</span></h1>
+      <p>Small reminders. Better rhythms. Your personal space to tune both.</p>
+    </section>
+    <form id="settings-form">
+      <div class="layout">
+        <div class="settings-column">
+          <section class="panel">
+            <div class="section-heading"><div><p class="kicker">01 / YOUR RHYTHM</p><h2>Independent reminders</h2></div><span class="pill">Active time, not clock time</span></div>
+            <p class="muted">Each reminder follows its own rule. A break only resets the reminders you configure.</p>
+            <div id="reminders"></div>
+          </section>
+          <section class="panel general">
+            <p class="kicker">02 / THE DETAILS</p>
+            <h2>A pace that works for you</h2>
+            <div class="fields two">
+              <label>Pause after idle seconds<input id="idle" type="number" min="1" max="3600" required><small>No keyboard or mouse input for this long pauses water and movement. Shorter reset rules still apply.</small></label>
+              <label>Popup duration in seconds<input id="duration" type="number" min="3" max="120" required><small>Each popup closes automatically. Due reminders appear one at a time.</small></label>
+            </div>
+          </section>
+        </div>
+        <aside>
+          <section class="panel appearance">
+            <p class="kicker">03 / MAKE IT YOURS</p>
+            <h2>A little personality</h2>
+            <p class="muted">Four looks. The same gentle nudge.</p>
+            <fieldset class="themes">
+              <legend class="sr-only">Notification theme</legend>
+              <label class="theme-option"><input type="radio" name="theme" value="glass" required><span class="swatch glass"></span><strong>Forest glass</strong><small>Soft &amp; translucent</small></label>
+              <label class="theme-option"><input type="radio" name="theme" value="daylight"><span class="swatch daylight"></span><strong>Daylight</strong><small>Fresh &amp; minimal</small></label>
+              <label class="theme-option"><input type="radio" name="theme" value="midnight"><span class="swatch midnight"></span><strong>Midnight</strong><small>Quiet &amp; focused</small></label>
+              <label class="theme-option"><input type="radio" name="theme" value="sunset"><span class="swatch sunset"></span><strong>Sunset</strong><small>Warm &amp; mellow</small></label>
+            </fieldset>
+            <div class="fields two">
+              <label>Notification size<select id="notification-size"><option value="small">Small</option><option value="medium">Medium</option><option value="large">Large</option></select></label>
+              <label>Background opacity <output id="opacity-value" for="notification-opacity">100%</output><input id="notification-opacity" type="range" min="40" max="100" step="1" value="100"></label>
+            </div>
+            <div class="preview-heading"><label for="preview-reminder">LIVE PREVIEW</label><button id="test-notification" type="button" class="secondary-button" disabled>Show notification</button></div>
+            <select id="preview-reminder" aria-label="Preview reminder"></select>
+            <p id="test-notification-status" role="status" aria-live="polite"></p>
+            <div class="preview-stage"><iframe id="preview" title="Notification live preview" sandbox="allow-scripts"></iframe></div>
+            <p class="preview-note">Preview shows unsaved edits. Save to apply them to your real reminders.</p>
+          </section>
+          <section class="privacy-note"><strong>Just you and your device.</strong><p>Settings are saved in localhost cookies and a local file. No account, no cloud. Locking or sleeping pauses tracking. Inactivity estimates breaks; it cannot detect sitting or drinking.</p><p>Editing a timing rule restarts that reminder's timer. Appearance and text edits keep its progress. Timers restart when the app restarts.</p></section>
+        </aside>
+      </div>
+      <footer class="save-bar"><div id="save-status" role="status" aria-live="polite">Loading settings...</div><button id="save" type="submit" disabled>Save changes <span aria-hidden="true">&rarr;</span></button></footer>
+    </form>
+    </section>
+    <section id="page-planner" class="page planner-page" aria-labelledby="planner-title" hidden>
+      <div class="planner-heading">
+        <div><p class="kicker">YOUR SCHEDULE</p><h1 id="planner-title" tabindex="-1">Reminders</h1></div>
+        <div class="view-switch" role="group" aria-label="Reminder view">
+          <button type="button" data-planner-view="dayGridMonth" aria-pressed="true"><i data-lucide="calendar-days" aria-hidden="true"></i>Calendar</button>
+          <button type="button" data-planner-view="listMonth" aria-pressed="false"><i data-lucide="list" aria-hidden="true"></i>List</button>
+        </div>
+        <button id="new-event" class="planner-primary" type="button" disabled><i data-lucide="plus" aria-hidden="true"></i>New reminder</button>
+      </div>
+      <div class="planner-toolbar">
+        <div class="planner-period">
+          <button id="planner-prev" class="icon-button" type="button" title="Previous month" aria-label="Previous month"><i data-lucide="chevron-left" aria-hidden="true"></i></button>
+          <button id="planner-next" class="icon-button" type="button" title="Next month" aria-label="Next month"><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+          <h2 id="planner-period-title"></h2>
+          <button id="planner-today" class="secondary-button" type="button">Today</button>
+        </div>
+        <div class="planner-filters">
+          <label><span class="sr-only">Reminder type</span><select id="planner-filter"><option value="all">All reminders</option><option value="task">Tasks</option><option value="meeting">Meetings</option></select></label>
+          <label class="planner-check"><input id="planner-completed" type="checkbox">Show completed</label>
+        </div>
+      </div>
+      <div class="planner-legend"><span><b class="task-dot"></b>Task</span><span><b class="meeting-dot"></b>Meeting</span><span id="planner-count"></span></div>
+      <p id="planner-status" role="status" aria-live="polite">Loading reminders...</p>
+      <button id="planner-retry" class="secondary-button" type="button" hidden><i data-lucide="refresh-cw" aria-hidden="true"></i>Retry</button>
+      <div id="planner-calendar" aria-label="Tasks and meetings calendar"></div>
+    </section>
+    <section id="page-documentation" class="page" aria-labelledby="documentation-title" hidden>
+      <div class="intro">
+        <p class="kicker">THE LITTLE RESET HANDBOOK</p>
+        <h1 id="documentation-title" tabindex="-1">A little <span>guidance.</span></h1>
+        <p>How to run, configure, and stop your reminders. Always available locally.</p>
+      </div>
+      <section class="panel document-panel" aria-label="Application documentation">
+        <p id="document-status" role="status">Loading documentation...</p>
+        <button id="document-retry" class="secondary-button" type="button" hidden>Retry loading documentation</button>
+        <article id="document-content"></article>
+      </section>
+    </section>
+    <section id="page-settings" class="page" aria-labelledby="settings-title" hidden>
+      <div class="intro">
+        <p class="kicker">YOUR PREFERENCES</p>
+        <h1 id="settings-title" tabindex="-1">Settings</h1>
+      </div>
+      <section class="dashboard-appearance" aria-labelledby="dashboard-appearance-title">
+        <h2 id="dashboard-appearance-title">Dashboard theme</h2>
+        <fieldset id="dashboard-theme-options" class="dashboard-theme-options">
+          <legend class="sr-only">Dashboard theme</legend>
+          <label class="dashboard-theme-option" data-palette="forest"><input type="radio" name="dashboard-theme" value="forest" disabled><span class="dashboard-palette" aria-hidden="true"><span></span><span></span><span></span></span><strong>Forest</strong></label>
+          <label class="dashboard-theme-option" data-palette="paper"><input type="radio" name="dashboard-theme" value="paper" disabled><span class="dashboard-palette" aria-hidden="true"><span></span><span></span><span></span></span><strong>Paper</strong></label>
+          <label class="dashboard-theme-option" data-palette="ocean"><input type="radio" name="dashboard-theme" value="ocean" disabled><span class="dashboard-palette" aria-hidden="true"><span></span><span></span><span></span></span><strong>Ocean</strong></label>
+          <label class="dashboard-theme-option" data-palette="rose"><input type="radio" name="dashboard-theme" value="rose" disabled><span class="dashboard-palette" aria-hidden="true"><span></span><span></span><span></span></span><strong>Rose</strong></label>
+          <label class="dashboard-theme-option" data-palette="graphite"><input type="radio" name="dashboard-theme" value="graphite" disabled><span class="dashboard-palette" aria-hidden="true"><span></span><span></span><span></span></span><strong>Graphite</strong></label>
+        </fieldset>
+        <p id="dashboard-theme-status" role="status" aria-live="polite"></p>
+      </section>
+      <div class="integration-grid">
+        <section class="panel integration-card">
+          <div class="integration-heading"><span class="integration-symbol" aria-hidden="true">&#9729;</span><span class="pill">NOT CONNECTED</span></div>
+          <h2>Weather</h2>
+          <p class="muted">A quick glance at the day outside, right in your top bar.</p>
+          <p class="integration-detail">The weather area is a placeholder. Live conditions, location selection, and a weather provider will be added in a future update.</p>
+          <p class="privacy-tag">No location access. No weather requests.</p>
+        </section>
+        <section class="panel integration-card">
+          <div class="integration-heading"><span class="integration-symbol" aria-hidden="true">+</span><span class="pill">PLANNED</span></div>
+          <h2>More real-time trackers</h2>
+          <p class="muted">Room for the signals that matter to your day.</p>
+          <p class="integration-detail">Future integrations and their preferences will live here. No additional trackers are running.</p>
+        </section>
+      </div>
+      <section class="panel settings-guide"><h2>Looking for reminder settings?</h2><p class="muted">Timers, idle rules, notification content, and all four themes are together in Activity.</p><a class="section-link" href="#activity">Go to Activity <span aria-hidden="true">&rarr;</span></a></section>
+    </section>
+  </main>
+  <dialog id="event-dialog" aria-labelledby="event-dialog-title">
+    <form id="event-form">
+      <div class="event-dialog-heading"><h2 id="event-dialog-title">New reminder</h2><button id="event-close" type="button" class="icon-button" title="Close" aria-label="Close reminder editor"><i data-lucide="x" aria-hidden="true"></i></button></div>
+      <div class="fields two">
+        <label class="wide">Title<input id="event-title" maxlength="80" required autocomplete="off"></label>
+        <label class="wide">Type<select id="event-type"><option value="task">Task</option><option value="meeting">Meeting</option></select></label>
+        <label>Start<input id="event-start" type="datetime-local" required></label>
+        <label>End<input id="event-end" type="datetime-local" required></label>
+        <label class="wide">Notify me<select id="event-lead"><option value="0">At the start time</option><option value="5">5 minutes before</option><option value="10">10 minutes before</option><option value="15">15 minutes before</option><option value="30">30 minutes before</option><option value="60">1 hour before</option><option value="1440">1 day before</option></select></label>
+        <label class="wide">Notes<textarea id="event-notes" rows="3" maxlength="240"></textarea></label>
+        <label class="planner-check wide"><input id="event-completed" type="checkbox">Completed</label>
+      </div>
+      <p id="event-status" role="status" aria-live="polite"></p>
+      <div class="event-dialog-actions">
+        <button id="event-delete" class="icon-button danger" type="button" title="Delete reminder" aria-label="Delete reminder" hidden><i data-lucide="trash-2" aria-hidden="true"></i></button>
+        <button id="event-test" class="secondary-button" type="button"><i data-lucide="bell" aria-hidden="true"></i>Test notification</button>
+        <button id="event-save" class="planner-primary" type="submit"><i data-lucide="check" aria-hidden="true"></i>Save reminder</button>
+      </div>
+    </form>
+  </dialog>
+  <template id="reminder-template">
+    <article class="reminder-card">
+      <div class="reminder-header">
+        <div class="reminder-identity"><img class="card-icon" alt=""><div><h3></h3><p class="timer-status">Waiting for tracker...</p></div></div>
+        <div class="reminder-actions">
+          <label class="toggle"><input class="enabled" type="checkbox"><span>Enabled</span></label>
+          <div class="reminder-timing"><span class="timer-label">Next reminder</span><p class="timer-remaining" role="timer" aria-label="Time until next reminder">--:--</p></div>
+        </div>
+      </div>
+      <div class="activity-track"><div></div></div>
+      <details><summary>Edit reminder rules &amp; content</summary>
+        <div class="fields two">
+          <label>Name<input class="name" maxlength="60" required></label>
+          <label>Active minutes between reminders<input class="interval" type="number" min="1" max="1440" required></label>
+          <label>Reset after an idle break<select class="reset-mode"><option value="reset">Reset progress after a break</option><option value="pause">Pause only, keep progress</option></select></label>
+          <label class="reset-field">Idle seconds to reset<input class="reset" type="number" min="1" max="86400"></label>
+          <label>Notification title<input class="title" maxlength="80" required></label>
+          <label>Animated illustration<select class="icon"><option value="assets/eye.gif">Eye break</option><option value="assets/water.gif">Water</option><option value="assets/walk.gif">Movement</option></select></label>
+          <label class="wide">Notification message<textarea class="message" maxlength="240" rows="2" required></textarea></label>
+        </div>
+      </details>
+    </article>
+  </template>
+</body>
+</html>
