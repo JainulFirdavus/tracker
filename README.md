@@ -24,10 +24,19 @@ between development and the installed app; both use port 4387.
   List at the top, filter by type, and click an entry to edit, complete, or delete
   it. New reminders have a local start/end time and a notification lead time.
   Test notification opens a real desktop popup without saving the draft.
+- **Music** has a separate navigation section for your audio library. Import a
+  folder of supported audio files, create playlists, mark favorites, or add
+  public SoundCloud track and playlist links. Local audio stays in this browser
+  profile; SoundCloud playback uses its embedded player and requires an internet
+  connection. Music settings include gradient themes, an optional glass effect,
+  and a transparency control. The header player also provides volume buttons
+  and a slider.
 - **Documentation** displays this README inside the dashboard, including
   instructions for stopping the app.
-- **Settings** is reserved for future integrations such as weather and other
-  real-time trackers. These integrations are not implemented or enabled yet.
+- **Settings** controls dashboard appearance—including the colorful Gradient
+  and translucent Glass themes, each with its own intensity slider—and login.
+  Optional integrations such as weather and other real-time trackers are not
+  implemented or enabled.
 
 The top bar includes a weather placeholder labeled **Not connected**. It does not
 show live conditions, request your location, or contact any weather service.
@@ -76,13 +85,19 @@ The installed app opens the dashboard in your default browser.
 
 ## Local data storage
 
-Saved application data uses local JSON files, not browser cookies, local storage, or cache:
+Application settings and dashboard data use local JSON files, not browser
+cookies or browser storage. The Music library is separate:
 
 - `config.json`: Activity rules, notification appearance, and dashboard preferences.
 - `reminder-events.json`: Planner tasks, meetings, and notification delivery records.
 - `notes.json`: Saved notes and documents.
 - `activity.json`: Accumulated reminder time, pending alerts, and retry state.
 - `auth.json`: Local username, random salt, and scrypt password hash. Never a plaintext password.
+
+Music files are stored in the browser's IndexedDB. Playlist names, favorites,
+and SoundCloud links are stored in browser local storage for this dashboard
+profile. Clearing browser data removes the music library, playlists, favorites,
+and SoundCloud links, but does not delete the JSON settings or reminder data.
 
 Installed builds store these files in Electron's writable user-data directory:
 
