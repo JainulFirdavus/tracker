@@ -16,8 +16,8 @@ between development and the installed app; both use port 4387.
 ## Dashboard navigation
 
 - **Activity** contains the live reminder progress, timing rules, notification
-  content, animations, and four notification themes. Save changes here to update
-  the running app and persist settings to the local JSON settings file.
+  content, and animations. Save reminder and timing changes here to update the
+  running app and persist settings to the local JSON settings file.
 - **Documentation** displays this README inside the dashboard, including
   instructions for stopping the app.
 - **Reminders** contains dated tasks and meetings. Switch between Calendar and
@@ -34,9 +34,10 @@ between development and the installed app; both use port 4387.
 - **Documentation** displays this README inside the dashboard, including
   instructions for stopping the app.
 - **Settings** controls dashboard appearance—including the colorful Gradient
-  and translucent Glass themes, each with its own intensity slider—and login.
-  Optional integrations such as weather and other real-time trackers are not
-  implemented or enabled.
+  and translucent Glass themes, each with its own intensity slider—notification
+  style and live preview (save notification appearance here independently from
+  reminder edits), and login. Optional integrations such as weather and other
+  real-time trackers are not implemented or enabled.
 
 The top bar includes a weather placeholder labeled **Not connected**. It does not
 show live conditions, request your location, or contact any weather service.

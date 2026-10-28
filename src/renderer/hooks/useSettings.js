@@ -245,6 +245,29 @@ export function useSettings() {
     }
   }
 
+  async function setNotificationAppearance(appearance) {
+    if (saving || !draft) return "Settings are still saving.";
+    setSaving(true);
+    try {
+      const settings = await request("/api/notification-appearance", {
+        method: "PUT",
+        body: JSON.stringify(appearance),
+      });
+      const savedAppearance = {
+        theme: settings.theme,
+        notificationSize: settings.notificationSize,
+        notificationOpacity: settings.notificationOpacity,
+      };
+      setSaved((current) => ({ ...current, ...savedAppearance }));
+      setDraft((current) => ({ ...current, ...savedAppearance }));
+      return "Notification style saved.";
+    } catch (failure) {
+      return failure.message;
+    } finally {
+      setSaving(false);
+    }
+  }
+
   async function setLogin(loginEnabled) {
     if (saving || dirty || !draft) return;
     setSaving(true);
@@ -282,6 +305,7 @@ export function useSettings() {
     setThemeIntensity,
     setFont,
     setMusic,
+    setNotificationAppearance,
     setLogin,
     retry: () => setReload((value) => value + 1),
   };

@@ -281,6 +281,10 @@ async function startApplication() {
       idleSeconds: powerMonitor.getSystemIdleTime(),
       reminders: scheduler.states.map(state => ({
         id: state.reminder.id,
+        name: state.reminder.name,
+        title: state.reminder.title,
+        message: state.reminder.message,
+        icon: state.reminder.icon,
         enabled: state.reminder.enabled !== false,
         activeSeconds: Math.floor(state.activeMs / 1000),
         targetSeconds: state.reminder.intervalMinutes * 60,

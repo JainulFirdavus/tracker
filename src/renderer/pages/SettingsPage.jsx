@@ -1,5 +1,7 @@
 import { ArrowRight, Cloud, Plus, Type } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { NotificationPreview } from "../components/NotificationPreview";
 
 const themes = [
   ["forest", "Forest"],
@@ -18,7 +20,72 @@ const dashboardFonts = [
   ["space-grotesk", "Space Grotesk", "Distinctive technical character"],
   ["lexend", "Lexend", "Comfortable long-form reading"],
 ];
-export function SettingsPage({ preferences }) {
+
+function NotificationAppearanceSettings({ preferences, activityReminders }) {
+  const savedAppearance = {
+    theme: preferences.saved?.theme ?? preferences.draft.theme,
+    notificationSize:
+      preferences.saved?.notificationSize ?? preferences.draft.notificationSize,
+    notificationOpacity:
+      preferences.saved?.notificationOpacity ??
+      preferences.draft.notificationOpacity,
+  };
+  const [appearance, setAppearance] = useState(savedAppearance);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    setAppearance(savedAppearance);
+  }, [
+    savedAppearance.theme,
+    savedAppearance.notificationSize,
+    savedAppearance.notificationOpacity,
+  ]);
+
+  const changed =
+    appearance.theme !== savedAppearance.theme ||
+    appearance.notificationSize !== savedAppearance.notificationSize ||
+    appearance.notificationOpacity !== savedAppearance.notificationOpacity;
+
+  return (
+    <form
+      id="settings-form"
+      className="notification-settings-form"
+      onSubmit={async (event) => {
+        event.preventDefault();
+        setMessage("Saving notification style...");
+        setMessage(await preferences.setNotificationAppearance(appearance));
+      }}
+    >
+      <NotificationPreview
+        draft={{ ...preferences.draft, ...appearance }}
+        reminders={activityReminders}
+        update={(patch) =>
+          setAppearance((current) => ({ ...current, ...patch }))
+        }
+        saving={preferences.saving}
+      />
+      <footer className="notification-settings-footer">
+        <p
+          className={preferences.error ? "error" : "muted"}
+          role="status"
+          aria-live="polite"
+        >
+          {preferences.error || message}
+        </p>
+        <button
+          id="save-notification-style"
+          className="planner-primary"
+          type="submit"
+          disabled={preferences.saving || !changed}
+        >
+          Save notification style
+        </button>
+      </footer>
+    </form>
+  );
+}
+
+export function SettingsPage({ preferences, activityReminders }) {
   const selectedFont =
     dashboardFonts.find(
       ([value]) => value === (preferences.draft.dashboardFont ?? "system"),
@@ -193,6 +260,22 @@ export function SettingsPage({ preferences }) {
             {preferences.loginMessage}
           </p>
         </section>
+      </section>
+      <section
+        className="settings-group"
+        aria-labelledby="notification-style-group-title"
+      >
+        <header className="settings-group-heading">
+          <div>
+            <p className="kicker">NOTIFICATIONS</p>
+            <h2 id="notification-style-group-title">Notification style</h2>
+          </div>
+          <p className="muted">Choose how reminder notifications look.</p>
+        </header>
+        <NotificationAppearanceSettings
+          preferences={preferences}
+          activityReminders={activityReminders}
+        />
       </section>
       <section
         className="settings-group"

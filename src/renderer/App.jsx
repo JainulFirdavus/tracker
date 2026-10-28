@@ -517,7 +517,10 @@ function PageStack() {
         hidden={page !== "settings"}
       >
         {(visitedPages.has("settings") || page === "settings") && (
-          <SettingsPage preferences={preferences} />
+          <SettingsPage
+            preferences={preferences}
+            activityReminders={tracker.status?.reminders}
+          />
         )}
       </section>
     </>

@@ -3699,3 +3699,23 @@ main {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+.notification-settings-form {
+  display: grid;
+  gap: 12px;
+}
+.notification-appearance {
+  min-width: 0;
+  margin: 0;
+}
+.notification-settings-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.notification-settings-footer p {
+  min-height: 18px;
+  margin: 0;
+  font-size: 11px;
+}

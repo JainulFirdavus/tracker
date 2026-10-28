@@ -1,6 +1,5 @@
 import { ArrowRight } from 'lucide-react';
 import { ReminderCard } from '../components/ReminderCard';
-import { NotificationPreview } from '../components/NotificationPreview';
 
 export function ActivityPage({ preferences, tracker }) {
   const { draft, update, save, saving, message, error } = preferences;
@@ -21,7 +20,6 @@ export function ActivityPage({ preferences, tracker }) {
           </div></section>
         </div>
         <aside>
-          <NotificationPreview draft={draft} update={update} saving={saving} />
         <section className="privacy-note"><strong>Just you and your device.</strong>
         <p>No account, no cloud. Inactivity estimates breaks; it cannot detect sitting or drinking.</p>
         </section>
@@ -32,4 +30,3 @@ export function ActivityPage({ preferences, tracker }) {
     </form>
   </>;
 }
-

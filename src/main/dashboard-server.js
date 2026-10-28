@@ -127,6 +127,8 @@ function createDashboardServer({
         req.method === "PUT" && route === "/api/dashboard-font";
       const savingMusicSettings =
         req.method === "PUT" && route === "/api/music-settings";
+      const savingNotificationAppearance =
+        req.method === "PUT" && route === "/api/notification-appearance";
       const savingNotes = req.method === "PUT" && route === "/api/notes";
       const savingLogin =
         req.method === "PUT" && route === "/api/auth/settings";
@@ -138,6 +140,7 @@ function createDashboardServer({
         savingDashboardTheme ||
         savingDashboardFont ||
         savingMusicSettings ||
+        savingNotificationAppearance ||
         savingNotes ||
         savingLogin
       ) {
@@ -228,6 +231,22 @@ function createDashboardServer({
               Array.isArray(input.music))
           )
             throw new Error("Choose valid music settings.");
+          if (savingNotificationAppearance) {
+            const appearanceKeys = [
+              "theme",
+              "notificationSize",
+              "notificationOpacity",
+            ];
+            if (
+              !input ||
+              typeof input !== "object" ||
+              Array.isArray(input) ||
+              Object.keys(input).some((key) => !appearanceKeys.includes(key)) ||
+              !Object.keys(input).length
+            ) {
+              throw new Error("Choose valid notification appearance settings.");
+            }
+          }
           if (savingLogin && typeof input?.loginEnabled !== "boolean")
             throw new Error("Login enabled must be true or false.");
           settings = validateSettings(
@@ -239,9 +258,11 @@ function createDashboardServer({
                   ? { ...getSettings(), dashboardFont: input.dashboardFont }
                   : savingMusicSettings
                     ? { ...getSettings(), music: input.music }
-                    : testing
-                      ? input.settings
-                      : input,
+                    : savingNotificationAppearance
+                      ? { ...getSettings(), ...input }
+                      : testing
+                        ? input.settings
+                        : input,
           );
           if (testing) {
             reminderId = input.reminderId;
@@ -269,6 +290,7 @@ function createDashboardServer({
           savingDashboardTheme ||
             savingDashboardFont ||
             savingMusicSettings ||
+            savingNotificationAppearance ||
             savingLogin
             ? (onSaveDashboardTheme ?? onSave)
             : onSave
